@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CreatorDesk - Automated Test Runner</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #181b26;
+      --border: #2b3245;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --pass: #10b981;
+      --fail: #ef4444;
+      --accent: #ff0033;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 2rem 1rem;
+      line-height: 1.5;
+    }
+    .test-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    h1 { font-size: 1.25rem; font-weight: 700; }
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+    .badge-pass { background: rgba(16, 185, 129, 0.2); color: var(--pass); }
+    .badge-fail { background: rgba(239, 68, 68, 0.2); color: var(--fail); }
+    .summary-bar {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+    }
+    .summary-item { font-size: 0.9rem; }
+    .summary-item strong { font-size: 1.1rem; }
+    .test-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .test-item {
+      padding: 1rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 4px solid var(--border);
+    }
+    .test-item.passed { border-left-color: var(--pass); }
+    .test-item.failed { border-left-color: var(--fail); }
+    .test-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .test-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
+    .test-error {
+      margin-top: 0.5rem;
+      padding: 0.5rem;
+      background: rgba(239, 68, 68, 0.1);
+      color: #fca5a5;
+      font-family: monospace;
+      font-size: 0.8rem;
+      border-radius: 4px;
+    }
+    .actions { margin-top: 1.5rem; display: flex; gap: 1rem; }
+    .btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-secondary { background: #334155; }
+    /* Hidden sandbox iframe for live DOM testing */
+    #app-frame { display: none; }
+  </style>
+</head>
+<body>
+  <div class="test-container">
+    <header>
+      <div>
+        <h1>CreatorDesk Test Runner</h1>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Automated in-browser test suite for Version 1</p>
+      </div>
+      <div id="overall-badge" class="badge">Running...</div>
+    </header>
+
+    <div class="summary-bar">
+      <div class="summary-item">Total Tests: <strong id="total-count">0</strong></div>
+      <div class="summary-item">Passed: <strong id="passed-count" style="color: var(--pass)">0</strong></div>
+      <div class="summary-item">Failed: <strong id="failed-count" style="color: var(--fail)">0</strong></div>
+    </div>
+
+    <ul id="test-list" class="test-list"></ul>
+
+    <div class="actions">
+      <button id="rerun-btn" class="btn" type="button">Rerun Tests</button>
+      <a href="index.html" class="btn btn-secondary">Open CreatorDesk App</a>
+    </div>
+  </div>
+
+  <iframe id="app-frame" src="index.html"></iframe>
+  <script src="generator-engine.js"></script>
+  <script src="test-suite.js"></script>
+</body>
+</html>

@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CreatorDesk - AI YouTube Shorts Studio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header / Navigation Shell -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect>
+            <polygon points="10 8 15 12 10 16 10 8" fill="currentColor"></polygon>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title-wrap">
+            <h1 class="brand-title">CreatorDesk</h1>
+            <span class="version-pill">V2 Studio</span>
+          </div>
+          <p class="brand-tagline">AI YouTube Shorts Production Studio</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Engine Status Badge -->
+        <button id="engine-status-badge" class="engine-badge" type="button" title="View Generation Engine Settings">
+          <span class="engine-dot"></span>
+          <span id="active-engine-label">Local Engine (Offline & Free)</span>
+        </button>
+
+        <button id="open-settings-btn" class="btn btn-secondary btn-icon-only" type="button" aria-label="Backup & Settings" title="Backup, Import/Export & Settings">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+
+        <button id="open-add-modal-btn" class="btn btn-primary" type="button" aria-haspopup="dialog">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>New Short Idea</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="app-nav" aria-label="Studio Navigation">
+      <div class="nav-container">
+        <button class="nav-tab active" data-view="dashboard" id="nav-tab-dashboard">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span>Dashboard</span>
+        </button>
+
+        <button class="nav-tab" data-view="planner" id="nav-tab-planner">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+          <span>Shorts Planner</span>
+        </button>
+
+        <button class="nav-tab" data-view="calendar" id="nav-tab-calendar">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>Calendar</span>
+        </button>
+
+        <button class="nav-tab" data-view="idea-lab" id="nav-tab-idea-lab">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18h6m-3-3v3M10 2a7 7 0 0 0-4 12.7c1.3 1.1 2 2.6 2 4.3h4c0-1.7.7-3.2 2-4.3A7 7 0 0 0 10 2z"></path>
+          </svg>
+          <span>Idea Lab</span>
+        </button>
+
+        <button class="nav-tab" data-view="title-gen" id="nav-tab-title-gen">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="4 7 4 4 20 4 20 7"></polyline>
+            <line x1="9" y1="20" x2="15" y2="20"></line>
+            <line x1="12" y1="4" x2="12" y2="20"></line>
+          </svg>
+          <span>Title Gen</span>
+        </button>
+
+        <button class="nav-tab" data-view="desc-gen" id="nav-tab-desc-gen">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          <span>SEO & Desc</span>
+        </button>
+
+        <button class="nav-tab" data-view="script-studio" id="nav-tab-script-studio">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span>Script Studio</span>
+        </button>
+
+        <button class="nav-tab" data-view="thumbnail-studio" id="nav-tab-thumbnail-studio">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <span>Thumbnail Studio</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="app-main">
+
+    <!-- =========================================================================
+         VIEW 1: CREATOR DASHBOARD (Phase 2)
+         ========================================================================= -->
+    <section id="view-dashboard" class="studio-view active">
+      <!-- 5 Workflow Metric Cards (Real Saved Data) -->
+      <div class="stats-grid stats-grid-5" aria-label="Shorts Overview Statistics">
+        <div class="stat-card">
+          <div class="stat-value" id="stat-total">0</div>
+          <div class="stat-label">Total Ideas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value text-amber" id="stat-ready-produce">0</div>
+          <div class="stat-label">Ready to Produce</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value text-blue" id="stat-editing">0</div>
+          <div class="stat-label">In Editing</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value text-cyan" id="stat-ready-publish">0</div>
+          <div class="stat-label">Ready to Publish</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value text-green" id="stat-published">0</div>
+          <div class="stat-label">Published</div>
+        </div>
+        <!-- Hidden legacy counters for V1 test compatibility -->
+        <div class="visually-hidden">
+          <span id="stat-in-progress">0</span>
+          <span id="stat-scheduled">0</span>
+        </div>
+      </div>
+
+      <!-- Quick Action Panel -->
+      <div class="quick-actions-card">
+        <div class="section-header">
+          <h2 class="section-title">Creator Quick Actions</h2>
+          <span class="section-hint">Instant shortcuts to jump into your production workflow</span>
+        </div>
+        <div class="quick-actions-grid">
+          <button class="action-btn" id="qa-new-idea" type="button">
+            <div class="action-icon bg-red">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </div>
+            <div class="action-text">
+              <strong>Add Short Idea</strong>
+              <span>Manually log a planned Short</span>
+            </div>
+          </button>
+
+          <button class="action-btn" id="qa-idea-lab" type="button">
+            <div class="action-icon bg-purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6m-3-3v3M10 2a7 7 0 0 0-4 12.7c1.3 1.1 2 2.6 2 4.3h4c0-1.7.7-3.2 2-4.3A7 7 0 0 0 10 2z"></path></svg>
+            </div>
+            <div class="action-text">
+              <strong>Idea Lab</strong>
+              <span>Generate viral Short concepts</span>
+            </div>
+          </button>
+
+          <button class="action-btn" id="qa-title-gen" type="button">
+            <div class="action-icon bg-blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+            </div>
+            <div class="action-text">
+              <strong>Title Generator</strong>
+              <span>High-CTR psychological angles</span>
+            </div>
+          </button>
+
+          <button class="action-btn" id="qa-script-studio" type="button">
+            <div class="action-icon bg-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <div class="action-text">
+              <strong>Script Studio</strong>
+              <span>Timed 15s / 30s / 60s scene scripts</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Two-Column Grid: Upcoming Uploads & Recently Edited -->
+      <div class="dashboard-columns">
+        <!-- Upcoming Planned Uploads -->
+        <div class="dashboard-panel">
+          <div class="panel-header">
+            <div class="panel-title-wrap">
+              <h3 class="panel-title">Upcoming Uploads</h3>
+              <span id="upcoming-count-badge" class="badge-count">0</span>
+            </div>
+            <button class="btn-text" id="view-calendar-shortcut" type="button">View Calendar &rarr;</button>
+          </div>
+          <div id="upcoming-uploads-list" class="upcoming-list">
+            <!-- Dynamically populated or empty state -->
+          </div>
+        </div>
+
+        <!-- Recently Edited Ideas -->
+        <div class="dashboard-panel">
+          <div class="panel-header">
+            <div class="panel-title-wrap">
+              <h3 class="panel-title">Recently Edited Ideas</h3>
+              <span id="recent-count-badge" class="badge-count">0</span>
+            </div>
+            <button class="btn-text" id="view-planner-shortcut" type="button">View All &rarr;</button>
+          </div>
+          <div id="recent-ideas-list" class="recent-list">
+            <!-- Dynamically populated or empty state -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         VIEW 2: SHORTS PLANNER & WORKSPACE (Phase 8 & 9 list view)
+         ========================================================================= -->
+    <section id="view-planner" class="studio-view">
+      <!-- Toolbar: Search, Filters, and Sorting -->
+      <section class="toolbar" aria-label="Search and filter ideas">
+        <div class="toolbar-search">
+          <label for="search-input" class="visually-hidden">Search ideas</label>
+          <div class="search-box">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input 
+              type="search" 
+              id="search-input" 
+              placeholder="Search by title, hook, topic, description, tags, or script..." 
+              autocomplete="off"
+            />
+            <button id="clear-search-btn" class="clear-input-btn hidden" type="button" aria-label="Clear search">
+              &times;
+            </button>
+          </div>
+        </div>
+
+        <div class="toolbar-filters">
+          <!-- Status Filter -->
+          <div class="filter-group">
+            <label for="filter-status" class="filter-label">Status:</label>
+            <select id="filter-status" class="select-control">
+              <option value="ALL">All Statuses</option>
+              <option value="Idea">Idea</option>
+              <option value="Script Ready">Script Ready</option>
+              <option value="Editing">Editing</option>
+              <option value="Thumbnail Ready">Thumbnail Ready</option>
+              <option value="Ready to Publish">Ready to Publish</option>
+              <option value="Published">Published</option>
+            </select>
+          </div>
+
+          <!-- Topic Filter -->
+          <div class="filter-group">
+            <label for="filter-topic" class="filter-label">Topic:</label>
+            <select id="filter-topic" class="select-control">
+              <option value="ALL">All Topics</option>
+            </select>
+          </div>
+
+          <!-- Sort Order -->
+          <div class="filter-group">
+            <label for="sort-select" class="filter-label">Sort by:</label>
+            <select id="sort-select" class="select-control">
+              <option value="date-asc">Upload Date (Earliest)</option>
+              <option value="date-desc">Upload Date (Latest)</option>
+              <option value="created-desc" selected>Recently Added</option>
+              <option value="title-asc">Title (A to Z)</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Filter Active Info / Counter -->
+      <div class="results-header" id="results-header">
+        <span id="results-count" class="results-count">Showing 0 ideas</span>
+        <button id="reset-filters-btn" class="btn-text hidden" type="button">Reset All Filters</button>
+      </div>
+
+      <!-- Ideas Container: List / Grid -->
+      <section class="ideas-section" aria-label="YouTube Shorts Ideas List">
+        <div id="ideas-grid" class="ideas-grid">
+          <!-- Dynamically rendered idea cards -->
+        </div>
+
+        <!-- Empty State: Zero Ideas Overall -->
+        <div id="empty-state-all" class="empty-state hidden">
+          <div class="empty-state-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect>
+              <path d="M12 8v4m0 4h.01"></path>
+            </svg>
+          </div>
+          <h2 class="empty-state-title">No Shorts Ideas Yet</h2>
+          <p class="empty-state-desc">Your board is clean and ready. Plan your first viral 60-second YouTube Short now or generate ideas in the Idea Lab!</p>
+          <div class="empty-state-actions">
+            <button id="empty-state-add-btn" class="btn btn-primary" type="button">
+              Create First Short Idea
+            </button>
+            <button id="empty-state-seed-btn" class="btn btn-secondary" type="button">
+              Load Starter Creator Pack
+            </button>
+          </div>
+        </div>
+
+        <!-- Empty State: No Matches Found for Filter/Search -->
+        <div id="empty-state-filtered" class="empty-state hidden">
+          <div class="empty-state-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+          <h2 class="empty-state-title">No Matching Ideas Found</h2>
+          <p class="empty-state-desc">Try adjusting your search terms, changing the topic filter, or clearing the status filter.</p>
+          <button id="empty-clear-filters-btn" class="btn btn-secondary" type="button">Clear Filters</button>
+        </div>
+      </section>
+    </section>
+
+    <!-- =========================================================================
+         VIEW 3: CONTENT CALENDAR (Phase 9 calendar view)
+         ========================================================================= -->
+    <section id="view-calendar" class="studio-view">
+      <div class="calendar-card">
+        <div class="calendar-toolbar">
+          <div class="calendar-nav-controls">
+            <button id="cal-prev-month" class="btn btn-secondary btn-sm" type="button" aria-label="Previous Month">&larr;</button>
+            <h2 id="calendar-month-year" class="calendar-title">October 2026</h2>
+            <button id="cal-next-month" class="btn btn-secondary btn-sm" type="button" aria-label="Next Month">&rarr;</button>
+          </div>
+          <div class="calendar-legend">
+            <span class="legend-item"><span class="dot dot-overdue"></span> Overdue</span>
+            <span class="legend-item"><span class="dot dot-editing"></span> In Production</span>
+            <span class="legend-item"><span class="dot dot-ready"></span> Ready</span>
+            <span class="legend-item"><span class="dot dot-published"></span> Published</span>
+          </div>
+        </div>
+
+        <div class="calendar-month-grid">
+          <div class="calendar-weekdays">
+            <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+          </div>
+          <div id="calendar-days" class="calendar-days">
+            <!-- Dynamically generated days -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         VIEW 4: CREATOR IDEA LAB (Phase 3)
+         ========================================================================= -->
+    <section id="view-idea-lab" class="studio-view">
+      <div class="tool-header">
+        <div>
+          <h2 class="tool-title">Creator Idea Lab</h2>
+          <p class="tool-subtitle">Brainstorm viral Shorts concepts by niche, format, and language with realistic creator angles.</p>
+        </div>
+        <span class="mode-tag">Local Generator (No Paid APIs)</span>
+      </div>
+
+      <div class="generator-layout">
+        <form id="idea-lab-form" class="generator-form-card">
+          <div class="form-group">
+            <label for="idea-niche" class="form-label">Niche / Category</label>
+            <select id="idea-niche" class="form-control select-control">
+              <option value="Technology">Technology & AI</option>
+              <option value="Gaming">Gaming (Free Fire, Minecraft, BGMI)</option>
+              <option value="Personal Finance">Personal Finance & Money</option>
+              <option value="Education">Education & Study Tips</option>
+              <option value="Entertainment">Entertainment & Comedy</option>
+              <option value="Fitness">Fitness & Health</option>
+              <option value="Custom">Custom Niche...</option>
+            </select>
+          </div>
+
+          <div class="form-group" id="idea-custom-niche-wrap" style="display: none;">
+            <label for="idea-custom-niche" class="form-label">Custom Niche Name</label>
+            <input type="text" id="idea-custom-niche" class="form-control" placeholder="e.g., Anime Edits, Woodworking" />
+          </div>
+
+          <div class="form-group">
+            <label for="idea-specific-topic" class="form-label">Specific Topic / Keyword (Optional)</label>
+            <input type="text" id="idea-specific-topic" class="form-control" placeholder="e.g., iPhone hacks, headshot trick, save 10k" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="idea-format" class="form-label">Short Format</label>
+              <select id="idea-format" class="form-control select-control">
+                <option value="all">All Formats</option>
+                <option value="tutorial">Tutorial / How-To</option>
+                <option value="facts">Quick Facts / Myths</option>
+                <option value="challenge">Challenge / Test</option>
+                <option value="comparison">Comparison / Vs</option>
+                <option value="list">Top 3 List</option>
+                <option value="story">Story / Drama</option>
+                <option value="reaction">Reaction / Commentary</option>
+                <option value="funny">Funny Moment / Meme</option>
+              </select>
+            </div>
+
+            <div class="form-group col-half">
+              <label for="idea-lang" class="form-label">Language</label>
+              <select id="idea-lang" class="form-control select-control">
+                <option value="english">English</option>
+                <option value="hindi">Hindi (हिंदी)</option>
+                <option value="hinglish">Hinglish</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="idea-audience" class="form-label">Target Audience</label>
+              <select id="idea-audience" class="form-control select-control">
+                <option value="General Viewers">General Viewers</option>
+                <option value="Beginners">Beginners</option>
+                <option value="Gamers">Gamers</option>
+                <option value="Students / Youth">Students / Youth</option>
+                <option value="Tech Enthusiasts">Tech Enthusiasts</option>
+              </select>
+            </div>
+
+            <div class="form-group col-half">
+              <label for="idea-count" class="form-label">Number of Ideas</label>
+              <select id="idea-count" class="form-control select-control">
+                <option value="3">3 Concepts</option>
+                <option value="5" selected>5 Concepts</option>
+                <option value="8">8 Concepts</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="generate-ideas-btn" class="btn btn-primary btn-block" type="submit">
+            Generate Short Ideas
+          </button>
+        </form>
+
+        <div class="generator-results-card">
+          <div class="results-toolbar">
+            <h3 class="results-heading">Generated Short Concepts</h3>
+            <span id="idea-lab-results-count" class="results-badge">0 generated</span>
+          </div>
+          <div id="idea-lab-results" class="results-container">
+            <div class="results-placeholder">
+              <p>Select your niche and click <strong>Generate Short Ideas</strong> to brainstorm concepts with opening hooks and execution steps.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         VIEW 5: TITLE GENERATOR (Phase 4)
+         ========================================================================= -->
+    <section id="view-title-gen" class="studio-view">
+      <div class="tool-header">
+        <div>
+          <h2 class="tool-title">YouTube Title Studio</h2>
+          <p class="tool-subtitle">Craft high-CTR, psychological title angles that stop viewers from swiping without misleading clickbait.</p>
+        </div>
+        <span class="mode-tag">Local Generator</span>
+      </div>
+
+      <div class="generator-layout">
+        <form id="title-gen-form" class="generator-form-card">
+          <div class="form-group">
+            <label for="title-topic" class="form-label">Video Topic or Summary <span class="required">*</span></label>
+            <input type="text" id="title-topic" class="form-control" placeholder="e.g., iPhone battery drain fix, Free Fire sniper trick" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="title-tone" class="form-label">Angle / Tone</label>
+              <select id="title-tone" class="form-control select-control">
+                <option value="curiosity">Curiosity & Intrigue</option>
+                <option value="educational">Educational / Authority</option>
+                <option value="energetic">High Energy & Hype</option>
+                <option value="funny">Humorous & Meme</option>
+                <option value="suspenseful">Suspenseful & Dramatic</option>
+              </select>
+            </div>
+
+            <div class="form-group col-half">
+              <label for="title-lang" class="form-label">Language</label>
+              <select id="title-lang" class="form-control select-control">
+                <option value="english">English</option>
+                <option value="hindi">Hindi (हिंदी)</option>
+                <option value="hinglish">Hinglish</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="title-format-type" class="form-label">Video Type</label>
+              <select id="title-format-type" class="form-control select-control">
+                <option value="Short">YouTube Short</option>
+                <option value="Tutorial">Quick Tutorial</option>
+                <option value="Story">Story / Experience</option>
+                <option value="Review">Review / Comparison</option>
+              </select>
+            </div>
+
+            <div class="form-group col-half">
+              <label for="title-keyword" class="form-label">Must-Include Keyword (Optional)</label>
+              <input type="text" id="title-keyword" class="form-control" placeholder="e.g., 2026, Free, iOS 18" />
+            </div>
+          </div>
+
+          <button id="generate-titles-btn" class="btn btn-primary btn-block" type="submit">
+            Generate Title Suggestions
+          </button>
+        </form>
+
+        <div class="generator-results-card">
+          <div class="results-toolbar">
+            <h3 class="results-heading">Title Variations & Angles</h3>
+            <span id="title-results-count" class="results-badge">0 titles</span>
+          </div>
+          <div id="title-results" class="results-container">
+            <div class="results-placeholder">
+              <p>Enter your topic to generate punchy titles with psychological angle breakdowns.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         VIEW 6: DESCRIPTION & SEO DRAFT GENERATOR (Phase 5)
+         ========================================================================= -->
+    <section id="view-desc-gen" class="studio-view">
+      <div class="tool-header">
+        <div>
+          <h2 class="tool-title">Description & SEO Studio</h2>
+          <p class="tool-subtitle">Generate clear opening hooks, readable descriptions, hashtags, YouTube tags, and pinned comment drafts.</p>
+        </div>
+        <span class="mode-tag">Local Generator</span>
+      </div>
+
+      <div class="generator-layout">
+        <form id="desc-gen-form" class="generator-form-card">
+          <div class="form-group">
+            <label for="desc-title" class="form-label">Video Title <span class="required">*</span></label>
+            <input type="text" id="desc-title" class="form-control" placeholder="e.g., 5 Hidden iPhone Battery Settings" required />
+          </div>
+
+          <div class="form-group">
+            <label for="desc-topic" class="form-label">Topic / Niche <span class="required">*</span></label>
+            <input type="text" id="desc-topic" class="form-control" placeholder="e.g., Tech Tips, Smartphone Hacks" required />
+          </div>
+
+          <div class="form-group">
+            <label for="desc-keywords" class="form-label">Keywords (comma-separated)</label>
+            <input type="text" id="desc-keywords" class="form-control" placeholder="e.g., iphone battery, save battery life, ios tips" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="desc-lang" class="form-label">Language</label>
+              <select id="desc-lang" class="form-control select-control">
+                <option value="english">English</option>
+                <option value="hindi">Hindi (हिंदी)</option>
+                <option value="hinglish">Hinglish</option>
+              </select>
+            </div>
+
+            <div class="form-group col-half">
+              <label for="desc-channel" class="form-label">Channel Name (Optional)</label>
+              <input type="text" id="desc-channel" class="form-control" placeholder="e.g., TechGuru Shorts" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="desc-cta" class="form-label">Call To Action</label>
+            <input type="text" id="desc-cta" class="form-control" value="Subscribe for daily smartphone hacks & tricks!" />
+          </div>
+
+          <button id="generate-desc-btn" class="btn btn-primary btn-block" type="submit">
+            Generate Description & Tags
+          </button>
+        </form>
+
+        <div class="generator-results-card">
+          <div class="results-toolbar">
+            <h3 class="results-heading">Generated Metadata Package</h3>
+            <button id="desc-copy-all-btn" class="btn btn-secondary btn-sm hidden" type="button">Copy All</button>
+          </div>
+          <div id="desc-results" class="results-container">
+            <div class="results-placeholder">
+              <p>Fill out video details on the left to generate descriptions, hashtags, tags, and pinned comments.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         VIEW 7: HOOK & SHORT SCRIPT STUDIO (Phase 6)
+         ========================================================================= -->
+    <section id="view-script-studio" class="studio-view">
+      <div class="tool-header">
+        <div>
+          <h2 class="tool-title">Hook & Short Script Studio</h2>
+          <p class="tool-subtitle">Build timed scene-by-scene scripts with opening hooks, realistic spoken pacing, visuals, and on-screen text.</p>
+        </div>
+        <span class="mode-tag">Local Generator</span>
+      </div>
+
+      <div class="generator-layout">
+        <form id="script-gen-form" class="generator-form-card">
+          <div class="form-group">
+            <label for="script-topic" class="form-label">Short Topic / Angle <span class="required">*</span></label>
+            <input type="text" id="script-topic" class="form-control" placeholder="e.g., How to edit videos 2x faster in CapCut" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="script-duration" class="form-label">Target Duration</label>
+              <select id="script-duration" class="form-control select-control">
+                <option value="15">15 Seconds (Rapid Punchline)</option>
+                <option value="30" selected>30 Seconds (Standard Short)</option>
+                <option value="60">60 Seconds (Full Breakdown)</option>
+              </select>
+            </div>
+
+            <div class="form-group col-half">
+              <label for="script-lang" class="form-label">Language</label>
+              <select id="script-lang" class="form-control select-control">
+                <option value="english">English</option>
+                <option value="hindi">Hindi (हिंदी)</option>
+                <option value="hinglish">Hinglish</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="script-tone" class="form-label">Pacing & Tone</label>
+            <select id="script-tone" class="form-control select-control">
+              <option value="energetic">High Energy & Fast Cuts</option>
+              <option value="authoritative">Authoritative & Insightful</option>
+              <option value="casual">Casual & Relatable</option>
+              <option value="dramatic">Dramatic & Suspenseful</option>
+            </select>
+          </div>
+
+          <button id="generate-script-btn" class="btn btn-primary btn-block" type="submit">
+            Draft Timed Script
+          </button>
+        </form>
+
+        <div class="generator-results-card">
+          <div class="results-toolbar">
+            <h3 class="results-heading">Script Timeline & Visual Cues</h3>
+            <button id="script-copy-btn" class="btn btn-secondary btn-sm hidden" type="button">Copy Script</button>
+          </div>
+          <div id="script-results" class="results-container">
+            <div class="results-placeholder">
+              <p>Configure your topic and target duration to draft a scene-by-scene script with timing markers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         VIEW 8: THUMBNAIL CONCEPT STUDIO (Phase 7)
+         ========================================================================= -->
+    <section id="view-thumbnail-studio" class="studio-view">
+      <div class="tool-header">
+        <div>
+          <h2 class="tool-title">Thumbnail Concept Studio</h2>
+          <p class="tool-subtitle">Design high-contrast visual concepts, focal points, lighting palettes, and AI image generator prompts.</p>
+        </div>
+        <span class="mode-tag">Concept & Prompt Studio</span>
+      </div>
+
+      <div class="generator-layout">
+        <form id="thumb-gen-form" class="generator-form-card">
+          <div class="form-group">
+            <label for="thumb-title" class="form-label">Video Title / Hook <span class="required">*</span></label>
+            <input type="text" id="thumb-title" class="form-control" placeholder="e.g., Stop Scrolling! iPhone Secret Revealed" required />
+          </div>
+
+          <div class="form-group">
+            <label for="thumb-subject" class="form-label">Main Subject <span class="required">*</span></label>
+            <input type="text" id="thumb-subject" class="form-control" placeholder="e.g., Shocked creator holding phone with glowing red screen" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="thumb-color" class="form-label">Color Preference</label>
+              <select id="thumb-color" class="form-control select-control">
+                <option value="Red & Black">Red & Black (High CTR)</option>
+                <option value="Blue & Gold">Blue & Gold (Tech/Trust)</option>
+                <option value="Neon Yellow & Purple">Neon Yellow & Purple (Gaming)</option>
+                <option value="Green & Dark Slate">Green & Dark Slate (Finance/Wealth)</option>
+              </select>
+            </div>
+
+            <div class="form-group col-half">
+              <label for="thumb-mood" class="form-label">Vibe / Mood</label>
+              <select id="thumb-mood" class="form-control select-control">
+                <option value="High Energy">High Energy & Dramatic</option>
+                <option value="Clean Tech">Clean Tech & Minimalist</option>
+                <option value="Mystery">Mystery & Dark Cinematic</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="generate-thumb-btn" class="btn btn-primary btn-block" type="submit">
+            Generate Thumbnail Concepts
+          </button>
+        </form>
+
+        <div class="generator-results-card">
+          <div class="results-toolbar">
+            <h3 class="results-heading">Thumbnail Concept Directions</h3>
+            <span id="thumb-results-count" class="results-badge">0 concepts</span>
+          </div>
+          <div id="thumb-results" class="results-container">
+            <div class="results-placeholder">
+              <p>Enter your video title and subject to generate visual compositions and prompts for AI image tools.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       MODAL 1: ADD / EDIT IDEA MODAL (Backward-compatible with V1)
+       ========================================================================= -->
+  <div id="idea-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="modal-title" class="modal-title">New Short Idea</h2>
+        <button id="modal-close-btn" class="btn-close" type="button" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <form id="idea-form" class="idea-form" novalidate>
+        <input type="hidden" id="idea-id" value="">
+
+        <!-- Title Field -->
+        <div class="form-group">
+          <label for="form-title" class="form-label">
+            Video Title <span class="required" aria-hidden="true">*</span>
+          </label>
+          <input 
+            type="text" 
+            id="form-title" 
+            name="title" 
+            class="form-control" 
+            placeholder="e.g., 5 Hidden iPhone Hacks You Must Try" 
+            maxlength="100"
+            required
+          />
+          <div class="field-meta">
+            <span id="title-error" class="form-error" role="alert"></span>
+            <span class="char-counter" id="title-counter">0 / 100</span>
+          </div>
+        </div>
+
+        <!-- Topic / Niche Field -->
+        <div class="form-group">
+          <label for="form-topic" class="form-label">
+            Topic / Niche <span class="required" aria-hidden="true">*</span>
+          </label>
+          <input 
+            type="text" 
+            id="form-topic" 
+            name="topic" 
+            class="form-control" 
+            placeholder="e.g., Tech Tips, Finance, Gaming, Fitness" 
+            list="topic-suggestions"
+            maxlength="50"
+            required
+          />
+          <datalist id="topic-suggestions">
+            <option value="Tech Tips">
+            <option value="Personal Finance">
+            <option value="Fitness & Health">
+            <option value="Gaming">
+            <option value="Cooking & Food">
+            <option value="Productivity">
+            <option value="Storytelling">
+          </datalist>
+          <div class="field-meta">
+            <span id="topic-error" class="form-error" role="alert"></span>
+            <span class="char-counter" id="topic-counter">0 / 50</span>
+          </div>
+        </div>
+
+        <!-- Hook Field -->
+        <div class="form-group">
+          <label for="form-hook" class="form-label">
+            The Hook (First 3-5 Seconds) <span class="required" aria-hidden="true">*</span>
+          </label>
+          <textarea 
+            id="form-hook" 
+            name="hook" 
+            class="form-control textarea-control" 
+            placeholder="e.g., Stop scrolling! If you use an iPhone, here are 3 settings you need to turn off right now..." 
+            rows="3" 
+            maxlength="250"
+            required
+          ></textarea>
+          <div class="field-meta">
+            <span id="hook-error" class="form-error" role="alert"></span>
+            <span class="char-counter" id="hook-counter">0 / 250</span>
+          </div>
+          <small class="form-hint">Tip: Strong hooks stop viewer swiping and dramatically increase retention!</small>
+        </div>
+
+        <!-- Two-column row for Date & Status -->
+        <div class="form-row">
+          <!-- Planned Upload Date -->
+          <div class="form-group col-half">
+            <label for="form-date" class="form-label">
+              Planned Upload Date <span class="required" aria-hidden="true">*</span>
+            </label>
+            <input 
+              type="date" 
+              id="form-date" 
+              name="plannedDate" 
+              class="form-control" 
+              required
+            />
+            <div class="field-meta">
+              <span id="date-error" class="form-error" role="alert"></span>
+            </div>
+          </div>
+
+          <!-- Production Status -->
+          <div class="form-group col-half">
+            <label for="form-status" class="form-label">
+              Workflow Status <span class="required" aria-hidden="true">*</span>
+            </label>
+            <select id="form-status" name="status" class="form-control select-control" required>
+              <option value="Idea">Idea</option>
+              <option value="Script Ready">Script Ready</option>
+              <option value="Editing">Editing</option>
+              <option value="Thumbnail Ready">Thumbnail Ready</option>
+              <option value="Ready to Publish">Ready to Publish</option>
+              <option value="Published">Published</option>
+            </select>
+            <div class="field-meta">
+              <span id="status-error" class="form-error" role="alert"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Actions -->
+        <div class="modal-footer">
+          <button id="modal-cancel-btn" class="btn btn-secondary" type="button">Cancel</button>
+          <button id="modal-submit-btn" class="btn btn-primary" type="submit">Save Short Idea</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 2: CREATOR WORKSPACE MODAL (Phase 8 Full Idea Studio)
+       ========================================================================= -->
+  <div id="workspace-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="workspace-title">
+    <div class="modal-card modal-card-xl">
+      <div class="modal-header">
+        <div>
+          <span class="badge-tag" id="ws-badge-topic">Tech Tips</span>
+          <h2 id="workspace-title" class="modal-title">Idea Production Studio</h2>
+        </div>
+        <button id="workspace-close-btn" class="btn-close" type="button" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <!-- Production Workflow Pipeline Stepper -->
+      <div class="workflow-stepper-wrap">
+        <div class="workflow-stepper" id="ws-stepper" aria-label="Production progress">
+          <button class="step-btn" data-status="Idea" type="button">
+            <span class="step-num">1</span>
+            <span class="step-label">Idea</span>
+          </button>
+          <span class="step-arrow">&rarr;</span>
+          <button class="step-btn" data-status="Script Ready" type="button">
+            <span class="step-num">2</span>
+            <span class="step-label">Script Ready</span>
+          </button>
+          <span class="step-arrow">&rarr;</span>
+          <button class="step-btn" data-status="Editing" type="button">
+            <span class="step-num">3</span>
+            <span class="step-label">Editing</span>
+          </button>
+          <span class="step-arrow">&rarr;</span>
+          <button class="step-btn" data-status="Thumbnail Ready" type="button">
+            <span class="step-num">4</span>
+            <span class="step-label">Thumb Ready</span>
+          </button>
+          <span class="step-arrow">&rarr;</span>
+          <button class="step-btn" data-status="Ready to Publish" type="button">
+            <span class="step-num">5</span>
+            <span class="step-label">Ready</span>
+          </button>
+          <span class="step-arrow">&rarr;</span>
+          <button class="step-btn" data-status="Published" type="button">
+            <span class="step-num">6</span>
+            <span class="step-label">Published</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Workspace Tabs -->
+      <div class="workspace-tabs-bar">
+        <button class="ws-tab active" data-tab="ws-tab-overview" type="button">Overview</button>
+        <button class="ws-tab" data-tab="ws-tab-script" type="button">Script & Scenes</button>
+        <button class="ws-tab" data-tab="ws-tab-seo" type="button">Description & SEO</button>
+        <button class="ws-tab" data-tab="ws-tab-thumb" type="button">Thumbnail Concept</button>
+        <button class="ws-tab" data-tab="ws-tab-notes" type="button">Production Notes</button>
+      </div>
+
+      <div class="workspace-body">
+        <!-- Tab 1: Overview -->
+        <div id="ws-tab-overview" class="ws-panel active">
+          <div class="form-group">
+            <label for="ws-title" class="form-label">Video Title</label>
+            <input type="text" id="ws-title" class="form-control" />
+          </div>
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="ws-topic" class="form-label">Topic / Niche</label>
+              <input type="text" id="ws-topic" class="form-control" />
+            </div>
+            <div class="form-group col-half">
+              <label for="ws-date" class="form-label">Planned Upload Date</label>
+              <input type="date" id="ws-date" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ws-hook" class="form-label">Opening Hook (0-5 seconds)</label>
+            <textarea id="ws-hook" class="form-control textarea-control" rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="ws-summary" class="form-label">Concept Summary</label>
+            <textarea id="ws-summary" class="form-control textarea-control" rows="2" placeholder="Summary of the video concept..."></textarea>
+          </div>
+        </div>
+
+        <!-- Tab 2: Script -->
+        <div id="ws-tab-script" class="ws-panel">
+          <div class="ws-panel-header">
+            <label for="ws-script-text" class="form-label">Full Video Script</label>
+            <button class="btn btn-secondary btn-sm" id="ws-send-to-script-studio-btn" type="button">
+              Open in Script Studio
+            </button>
+          </div>
+          <textarea id="ws-script-text" class="form-control textarea-control" rows="8" placeholder="Draft your 15s/30s/60s script here, or attach from the Script Studio..."></textarea>
+        </div>
+
+        <!-- Tab 3: SEO -->
+        <div id="ws-tab-seo" class="ws-panel">
+          <div class="form-group">
+            <label for="ws-description" class="form-label">Video Description</label>
+            <textarea id="ws-description" class="form-control textarea-control" rows="4" placeholder="Full YouTube video description..."></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label for="ws-hashtags" class="form-label">Hashtags (#Shorts, etc.)</label>
+              <input type="text" id="ws-hashtags" class="form-control" placeholder="#Shorts #TechTips" />
+            </div>
+            <div class="form-group col-half">
+              <label for="ws-tags" class="form-label">YouTube Studio Tags (Comma-separated)</label>
+              <input type="text" id="ws-tags" class="form-control" placeholder="shorts, iphone tips, tech" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ws-pinned-comment" class="form-label">Pinned Comment</label>
+            <input type="text" id="ws-pinned-comment" class="form-control" placeholder="Engaging question for comments..." />
+          </div>
+        </div>
+
+        <!-- Tab 4: Thumbnail -->
+        <div id="ws-tab-thumb" class="ws-panel">
+          <div class="form-group">
+            <label for="ws-thumb-prompt" class="form-label">AI Image Prompt (Midjourney / SD / DALL-E)</label>
+            <textarea id="ws-thumb-prompt" class="form-control textarea-control" rows="3" placeholder="Cinematic thumbnail concept prompt..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="ws-thumb-negative" class="form-label">Negative Prompt</label>
+            <input type="text" id="ws-thumb-negative" class="form-control" placeholder="blurry, distorted, watermark, text" />
+          </div>
+          <div class="form-group">
+            <label for="ws-thumb-text" class="form-label">Suggested On-Screen Text Overlay</label>
+            <input type="text" id="ws-thumb-text" class="form-control" placeholder="e.g., DON'T DO THIS! ⚠️" />
+          </div>
+        </div>
+
+        <!-- Tab 5: Notes -->
+        <div id="ws-tab-notes" class="ws-panel">
+          <div class="form-group">
+            <label for="ws-notes" class="form-label">Production & Editing Notes</label>
+            <textarea id="ws-notes" class="form-control textarea-control" rows="7" placeholder="Add B-roll notes, music links, CapCut sound effect cues, etc..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="ws-cancel-btn" class="btn btn-secondary" type="button">Cancel</button>
+        <button id="ws-save-btn" class="btn btn-primary" type="button">Save Workspace Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 3: SETTINGS & BACKUP MODAL (Phase 10 & 11)
+       ========================================================================= -->
+  <div id="settings-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="settings-title" class="modal-title">Studio Settings & Backup</h2>
+        <button id="settings-close-btn" class="btn-close" type="button" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <div class="modal-body settings-body">
+        <!-- Backup & Export -->
+        <div class="settings-section">
+          <h3 class="settings-heading">Data Backup & Export</h3>
+          <p class="settings-desc">Export your entire Shorts workspace, scripts, and concepts as a single portable JSON file.</p>
+          <div class="settings-actions" style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="creatordesk-v2-export.zip" download="creatordesk-v2-export.zip" class="btn btn-primary" style="text-decoration: none;">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Download Project Source (.ZIP)</span>
+            </a>
+            <button id="export-json-btn" class="btn btn-secondary" type="button">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Export Workspace (JSON)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Restore / Import -->
+        <div class="settings-section">
+          <h3 class="settings-heading">Restore Workspace from JSON</h3>
+          <p class="settings-desc">Import an existing CreatorDesk JSON backup file. You can choose to merge or replace existing ideas.</p>
+          <input type="file" id="import-file-input" accept=".json,application/json" class="file-input" />
+          <div class="import-options-row">
+            <label class="radio-label">
+              <input type="radio" name="import-mode" value="merge" checked />
+              <span>Merge with existing ideas</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="import-mode" value="replace" />
+              <span>Replace entire workspace</span>
+            </label>
+          </div>
+          <button id="import-json-btn" class="btn btn-secondary" type="button">
+            Import JSON Backup
+          </button>
+        </div>
+
+        <!-- Generation Engine Information -->
+        <div class="settings-section">
+          <h3 class="settings-heading">Generation Engine Architecture</h3>
+          <p class="settings-desc">
+            CreatorDesk V2 uses a provider-independent architecture. The default engine is the 
+            <strong>Built-in Local Creator Studio Engine</strong>, which is 100% free, runs offline in your browser, 
+            and requires no API keys, billing, or accounts.
+          </p>
+          <div class="engine-info-card">
+            <div class="engine-status-row">
+              <span class="engine-dot"></span>
+              <strong>Active Engine: Local Creator Template Engine</strong>
+            </div>
+            <p class="engine-subtext">Zero external network calls &bull; Safe & Private &bull; Supports English, Hindi, and Hinglish</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="settings-done-btn" class="btn btn-primary" type="button">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 4: DELETE CONFIRMATION MODAL
+       ========================================================================= -->
+  <div id="delete-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+    <div class="modal-card modal-card-sm">
+      <div class="modal-header">
+        <h2 id="delete-modal-title" class="modal-title">Delete Short Idea?</h2>
+        <button id="delete-modal-close-btn" class="btn-close" type="button" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="delete-warning-text">Are you sure you want to delete <strong id="delete-item-title">this idea</strong>? This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button id="delete-cancel-btn" class="btn btn-secondary" type="button">Keep Idea</button>
+        <button id="delete-confirm-btn" class="btn btn-danger" type="button">Yes, Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 5: PUBLISH CONFIRMATION MODAL
+       ========================================================================= -->
+  <div id="publish-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="publish-modal-title">
+    <div class="modal-card modal-card-sm">
+      <div class="modal-header">
+        <h2 id="publish-modal-title" class="modal-title">Mark Short as Published?</h2>
+        <button id="publish-modal-close-btn" class="btn-close" type="button" aria-label="Close dialog">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="delete-warning-text">Congratulations on publishing! Do you want to mark <strong id="publish-item-title">this Short</strong> as published?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="publish-cancel-btn" class="btn btn-secondary" type="button">Not Yet</button>
+        <button id="publish-confirm-btn" class="btn btn-primary" type="button">Yes, Mark Published 🎉</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Application Scripts -->
+  <script src="generator-engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
